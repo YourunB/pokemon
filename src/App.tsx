@@ -1,5 +1,5 @@
 import pokemonLogo from './assets/images/logo-name.png'
-import './App.css'
+import './App.sass'
 
 function App() {
   return (
