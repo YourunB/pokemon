@@ -1,4 +1,4 @@
-import './App.sass'
+import './App.sass';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PageStart from './src/pages/pageStart';
 import PageAbout from './src/pages/PageAbout';
@@ -17,7 +17,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

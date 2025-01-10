@@ -1,9 +1,5 @@
 const PageHome = () => {
-  return (
-    <>
-      Home page...
-    </>
-  )
-}
+  return <>Home page...</>;
+};
 
-export default PageHome
+export default PageHome;
