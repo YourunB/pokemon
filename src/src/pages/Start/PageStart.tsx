@@ -1,4 +1,4 @@
-import pokemonLogo from '../assets/images/logo-name.png';
+import pokemonLogo from '../../assets/images/logo-name.png';
 import { Link } from 'react-router-dom';
 
 const PageStart = () => {
