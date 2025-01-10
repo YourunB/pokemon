@@ -35,8 +35,8 @@ const PageStart = () => {
           . The application is written in{' '}
           <a href="https://www.typescriptlang.org/" target="_blank">
             TypeScript
-          </a>
-          .
+          </a>{' '}
+          and has <a href="https://feature-sliced.design/">FSD</a> architecture.
         </p>
       </div>
     </>
