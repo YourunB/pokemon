@@ -8,7 +8,7 @@ export const apiSlice = createApi({
       query: (name: string) => `pokemon/${name}`,
     }),
     fetchPokemonList: builder.query({
-      query: (limit = 20, offset = 0) => `pokemon?limit=${limit}&offset=${offset}`,
+      query: (offset = 0, limit = 20) => `pokemon?offset=${offset}&limit=${limit}`,
     }),
   }),
 });
