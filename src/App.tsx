@@ -5,7 +5,7 @@ import PageAbout from './pages/About';
 import PageHome from './pages/Home';
 import PageNotFound from './pages/NotFound';
 
-function App() {
+const App = () => {
   return (
     <>
       <BrowserRouter>
