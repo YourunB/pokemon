@@ -1,9 +1,9 @@
 import './App.sass';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PageStart from './src/pages/Start/PageStart';
-import PageAbout from './src/pages/About';
-import PageHome from './src/pages/Home';
-import PageNotFound from './src/pages/NotFound';
+import PageStart from './pages/Start/PageStart';
+import PageAbout from './pages/About';
+import PageHome from './pages/Home';
+import PageNotFound from './pages/NotFound';
 
 function App() {
   return (
