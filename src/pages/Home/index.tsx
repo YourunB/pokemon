@@ -95,6 +95,9 @@ const PageHome: React.FC = () => {
               transform: 'rotate(-10deg)',
               overflow: 'hidden',
               padding: 2,
+              '@media (max-width: 768px)': {
+                transform: 'none',
+              },
             }}
           >
             <Box
