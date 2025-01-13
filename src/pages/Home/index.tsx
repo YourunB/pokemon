@@ -9,8 +9,7 @@ type TPokemonData = {
   sprites: {
     front_default: string;
   };
-}
-
+};
 
 const PageHome: React.FC = () => {
   const [pokemonName, setPokemonName] = useState<string>('pikachu');
@@ -43,11 +42,11 @@ const PageHome: React.FC = () => {
       </div>
 
       <h2>Pokemon List:</h2>
-        {pokemonList?.results?.map((pokemon: TPokemonData) => (
-          <Button variant="outlined" color="secondary" onClick={() => handlePokemonChange(pokemon.name)}>
-            {pokemon.name}
-          </Button>
-        ))}
+      {pokemonList?.results?.map((pokemon: TPokemonData) => (
+        <Button variant="outlined" color="secondary" onClick={() => handlePokemonChange(pokemon.name)}>
+          {pokemon.name}
+        </Button>
+      ))}
 
       {pokemonData && 'name' in pokemonData && (
         <div>
@@ -59,9 +58,13 @@ const PageHome: React.FC = () => {
       )}
 
       <div>
-        page: {page}
-        <Button variant="contained" color="primary" onClick={() => handlePageChange(-1)}>prev</Button>
-        <Button variant="contained" color="primary" onClick={() => handlePageChange(1)}>next</Button>
+        page: {page + 1}
+        <Button variant="contained" color="primary" onClick={() => handlePageChange(-1)}>
+          prev
+        </Button>
+        <Button variant="contained" color="primary" onClick={() => handlePageChange(1)}>
+          next
+        </Button>
       </div>
     </div>
   );
