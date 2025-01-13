@@ -56,7 +56,7 @@ const PageHome: React.FC = () => {
   return (
     <Box>
       <ThemeProvider theme={theme}>
-        <Input sx={{padding: '5px'}} value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
+        <Input sx={{padding: '5px', fontWeight: '700'}} value={pokemonName.toUpperCase()} onChange={(e) => setPokemonName(e.target.value)} />
 
         {pokemonData && 'name' in pokemonData && (
           <Button variant="contained" color="primary" onClick={handleOpenModal}>
