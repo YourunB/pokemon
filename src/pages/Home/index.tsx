@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiSlice';
-import { Button, Typography } from '@mui/material';
+
+import { Box, Button, Input, Typography } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#dc004e',
+    },
+  },
+});
 
 type TPokemonData = {
   name: string;
@@ -34,39 +47,41 @@ const PageHome: React.FC = () => {
   console.log('search', pokemonData);
 
   return (
-    <div>
-      <div>
-        <h3>Pokemon:</h3>
-        <input value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
-        {pokemonError && <div>not found pokemon...</div>}
-      </div>
-
-      <h2>Pokemon List:</h2>
-      {pokemonList?.results?.map((pokemon: TPokemonData) => (
-        <Button variant="outlined" color="secondary" onClick={() => handlePokemonChange(pokemon.name)}>
-          {pokemon.name}
-        </Button>
-      ))}
-
-      {pokemonData && 'name' in pokemonData && (
+    <Box>
+      <ThemeProvider theme={theme}>
         <div>
-          <h3>{pokemonData.name}</h3>
-          <img src={pokemonData.sprites.front_default} alt={pokemonData.name} />
-          <p>Height: {pokemonData.height}</p>
-          <p>Weight: {pokemonData.weight}</p>
+          <Typography>POKEMON:</Typography>
+          <Input value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
+          {pokemonError && <div>not found pokemon...</div>}
         </div>
-      )}
 
-      <div>
-        page: {page + 1}
-        <Button variant="contained" color="primary" onClick={() => handlePageChange(-1)}>
-          prev
-        </Button>
-        <Button variant="contained" color="primary" onClick={() => handlePageChange(1)}>
-          next
-        </Button>
-      </div>
-    </div>
+        <Typography>POKEMONS:</Typography>
+        {pokemonList?.results?.map((pokemon: TPokemonData) => (
+          <Button variant="outlined" color="secondary" onClick={() => handlePokemonChange(pokemon.name)}>
+            {pokemon.name}
+          </Button>
+        ))}
+
+        {pokemonData && 'name' in pokemonData && (
+          <div>
+            <Typography>{pokemonData.name}</Typography>
+            <img src={pokemonData.sprites.front_default} alt={pokemonData.name} />
+            <Typography>Height: {pokemonData.height}</Typography>
+            <Typography>Weight: {pokemonData.weight}</Typography>
+          </div>
+        )}
+
+        <div>
+          page: {page + 1}
+          <Button variant="contained" color="primary" onClick={() => handlePageChange(-1)}>
+            prev
+          </Button>
+          <Button variant="contained" color="primary" onClick={() => handlePageChange(1)}>
+            next
+          </Button>
+        </div>
+      </ThemeProvider>
+    </Box>
   );
 };
 
