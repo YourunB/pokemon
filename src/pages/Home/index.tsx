@@ -30,7 +30,7 @@ const PageHome: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { data: pokemonList, error: listError, isLoading: isLoadingList } = useFetchPokemonListQuery(page * 20);
-  const { data: pokemonData, error: pokemonError, isLoading: isLoadingPokemon } = useFetchPokemonQuery(pokemonName);
+  const { data: pokemonData } = useFetchPokemonQuery(pokemonName);
 
   const handlePokemonChange = (name: string) => {
     setPokemonName(name);
@@ -51,7 +51,7 @@ const PageHome: React.FC = () => {
   };
 
   if (isLoadingList) return <div>Loading Pokemon List...</div>;
-  if (listError) return <div>Error loading list: {listError.message}</div>;
+  if (listError) return <div>Error loading list...</div>;
 
   return (
     <Box>
@@ -135,6 +135,7 @@ const PageHome: React.FC = () => {
           <Modal open={openModal} onClose={handleCloseModal}>
             <Box
               sx={{
+                width: '200px',
                 position: 'absolute',
                 top: '50%',
                 left: '50%',

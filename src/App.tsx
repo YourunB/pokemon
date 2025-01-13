@@ -1,4 +1,3 @@
-import './App.sass';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PageStart from './pages/Start';
 import PageAbout from './pages/About';
