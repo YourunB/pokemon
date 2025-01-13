@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiSlice';
+import { Button, Typography } from '@mui/material';
 
 type TPokemonData = {
   name: string;
@@ -42,15 +43,11 @@ const PageHome: React.FC = () => {
       </div>
 
       <h2>Pokemon List:</h2>
-      <ul>
         {pokemonList?.results?.map((pokemon: TPokemonData) => (
-          <li key={pokemon.name}>
-            <button onClick={() => handlePokemonChange(pokemon.name)}>
-              {pokemon.name}
-            </button>
-          </li>
+          <Button variant="outlined" color="secondary" onClick={() => handlePokemonChange(pokemon.name)}>
+            {pokemon.name}
+          </Button>
         ))}
-      </ul>
 
       {pokemonData && 'name' in pokemonData && (
         <div>
@@ -63,8 +60,8 @@ const PageHome: React.FC = () => {
 
       <div>
         page: {page}
-        <button onClick={() => handlePageChange(-1)}>prev</button>
-        <button onClick={() => handlePageChange(1)}>next</button>
+        <Button variant="contained" color="primary" onClick={() => handlePageChange(-1)}>prev</Button>
+        <Button variant="contained" color="primary" onClick={() => handlePageChange(1)}>next</Button>
       </div>
     </div>
   );
