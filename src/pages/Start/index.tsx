@@ -28,7 +28,11 @@ const PageStart = () => {
           <a href="https://redux-toolkit.js.org/rtk-query/overview" target="_blank">
             RTK Query
           </a>
-          , <a href="https://vite.dev/guide/">Vite</a> and{' '}
+          , <a href="https://vite.dev/guide/">Vite</a>,{' '}
+          <a href="https://mui.com/" target="_blank">
+            MUI
+          </a>{' '}
+          and{' '}
           <a href="https://pokeapi.co/" target="_blank">
             PokeAPI
           </a>

@@ -1,6 +1,5 @@
-import './App.sass';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PageStart from './pages/Start/PageStart';
+import PageStart from './pages/Start';
 import PageAbout from './pages/About';
 import PageHome from './pages/Home';
 import PageNotFound from './pages/NotFound';
@@ -18,6 +17,6 @@ const App = () => {
       </BrowserRouter>
     </>
   );
-}
+};
 
 export default App;

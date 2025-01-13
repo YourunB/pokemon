@@ -1,6 +1,20 @@
 import React, { useState } from 'react';
 import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiSlice';
 
+import { Modal, Box, Button, Input, Typography } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000',
+    },
+    secondary: {
+      main: '#000',
+    },
+  },
+});
+
 type TPokemonData = {
   name: string;
   height: number;
@@ -8,18 +22,19 @@ type TPokemonData = {
   sprites: {
     front_default: string;
   };
-}
-
+};
 
 const PageHome: React.FC = () => {
   const [pokemonName, setPokemonName] = useState<string>('pikachu');
   const [page, setPage] = useState<number>(0);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { data: pokemonList, error: listError, isLoading: isLoadingList } = useFetchPokemonListQuery(page * 20);
-  const { data: pokemonData, error: pokemonError, isLoading: isLoadingPokemon } = useFetchPokemonQuery(pokemonName);
+  const { data: pokemonData } = useFetchPokemonQuery(pokemonName);
 
   const handlePokemonChange = (name: string) => {
     setPokemonName(name);
+    handleOpenModal();
   };
 
   const handlePageChange = (n: number) => {
@@ -27,46 +42,129 @@ const PageHome: React.FC = () => {
     if (resultPage >= 0) setPage(resultPage);
   };
 
-  if (isLoadingList) return <div>Loading Pokemon List...</div>;
-  if (listError) return <div>Error loading list: {listError.message}</div>;
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
 
-  console.log('render', pokemonList);
-  console.log('search', pokemonData);
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  if (isLoadingList) return <div>Loading Pokemon List...</div>;
+  if (listError) return <div>Error loading list...</div>;
 
   return (
-    <div>
-      <div>
-        <h3>Pokemon:</h3>
-        <input value={pokemonName} onChange={(e) => setPokemonName(e.target.value)} />
-        {pokemonError && <div>not found pokemon...</div>}
-      </div>
+    <Box>
+      <ThemeProvider theme={theme}>
+        <Input sx={{padding: '5px', fontWeight: '700'}} value={pokemonName.toUpperCase()} onChange={(e) => setPokemonName(e.target.value)} />
 
-      <h2>Pokemon List:</h2>
-      <ul>
-        {pokemonList?.results?.map((pokemon: TPokemonData) => (
-          <li key={pokemon.name}>
-            <button onClick={() => handlePokemonChange(pokemon.name)}>
-              {pokemon.name}
-            </button>
-          </li>
-        ))}
-      </ul>
+        {pokemonData && 'name' in pokemonData && (
+          <Button variant="contained" color="primary" onClick={handleOpenModal}>
+            Show Pokemon Info
+          </Button>
+        )}
 
-      {pokemonData && 'name' in pokemonData && (
-        <div>
-          <h3>{pokemonData.name}</h3>
-          <img src={pokemonData.sprites.front_default} alt={pokemonData.name} />
-          <p>Height: {pokemonData.height}</p>
-          <p>Weight: {pokemonData.weight}</p>
-        </div>
-      )}
+          <Box
+            sx={{
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+          <Box>         
+          <Typography
+            variant="h4"
+            sx={{
+              textAlign: 'center',
+              marginBottom: 4,
+              fontWeight: 'bold',
+              color: '#333',
+            }}
+          >
+            POKEMONS
+          </Typography>
 
-      <div>
-        page: {page}
-        <button onClick={() => handlePageChange(-1)}>prev</button>
-        <button onClick={() => handlePageChange(1)}>next</button>
-      </div>
-    </div>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transform: 'rotate(-10deg)',
+              overflow: 'hidden',
+              padding: 2,
+              '@media (max-width: 768px)': {
+                transform: 'none',
+              },
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                gap: 2,
+              }}
+            >
+              <Button sx={{ transform: 'rotate(10deg)' }} variant="outlined" color="secondary" onClick={() => handlePageChange(-1)}>
+                prev
+              </Button>
+              {pokemonList?.results?.map((pokemon: TPokemonData) => (
+                <Button
+                  key={pokemon.name}
+                  variant="text"
+                  color="secondary"
+                  onClick={() => handlePokemonChange(pokemon.name)}
+                  sx={{
+                    transform: 'rotate(10deg)',
+                    fontSize: '1.2rem',
+                    padding: '12px 20px',
+                  }}
+                >
+                  {pokemon.name}
+                </Button>
+              ))}
+              <Button sx={{ transform: 'rotate(10deg)' }} variant="outlined" color="secondary" onClick={() => handlePageChange(1)}>
+                next
+              </Button>
+            </Box>
+          </Box>
+          </Box>
+        </Box>
+
+        {pokemonData && 'name' in pokemonData && (
+          <Modal open={openModal} onClose={handleCloseModal}>
+            <Box
+              sx={{
+                width: '200px',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                backgroundColor: 'white',
+                padding: 3,
+                borderRadius: 2,
+                boxShadow: 24,
+              }}
+            >
+              <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: 2 }}>
+                {pokemonData?.name.toUpperCase()}
+              </Typography>
+              <img src={pokemonData?.sprites.front_default} alt={pokemonData?.name} style={{ width: '100px', height: '100px', display: 'block', margin: '0 auto' }} />
+              <Typography sx={{ marginTop: 2 }}>Height: {pokemonData?.height}</Typography>
+              <Typography>Weight: {pokemonData?.weight}</Typography>
+              <Box sx={{ textAlign: 'center', marginTop: 3 }}>
+                <Button variant="contained" color="primary" onClick={handleCloseModal}>
+                  Close
+                </Button>
+              </Box>
+            </Box>
+          </Modal>
+          )}
+      </ThemeProvider>
+    </Box>
   );
 };
 
