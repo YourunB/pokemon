@@ -66,7 +66,7 @@ const PageHome: React.FC = () => {
 
           <Box
             sx={{
-              height: '100vh',
+              height: 'calc(100vh - 62px)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
