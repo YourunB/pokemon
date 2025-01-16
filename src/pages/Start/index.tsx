@@ -8,7 +8,9 @@ const PageStart = () => {
     <div className={s.box}>
       <Box sx={{display: 'flex', gap: '10px', maxWidth: '1280px', margin: 'auto', minHeight: 'calc(100vh - 20px)', alignItems: 'center'}}>
         <Box sx={{textAlign: 'center'}}>
-          <img src={pokemonLogo} className={s.logo} alt="React logo" />
+          <Link to={'/home'}>
+            <img src={pokemonLogo} className={s.logo} alt="React logo" />
+          </Link>
           <Box>
             <Typography>
               This application is developed for educational purposes using technologies such as{' '}
