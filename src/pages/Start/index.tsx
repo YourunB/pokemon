@@ -1,11 +1,12 @@
 import pokemonLogo from '../../assets/images/logo-name.png';
 import { Link } from 'react-router-dom';
+import s from './index.module.sass'
 
 const PageStart = () => {
   return (
     <>
       Page start...
-      <img src={pokemonLogo} className="logo react" alt="React logo" />
+      <img src={pokemonLogo} className={s.logo} alt="React logo" />
       <ul>
         <li>
           <Link to={'/home'}>Home page</Link>
