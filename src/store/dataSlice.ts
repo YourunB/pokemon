@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { TPokemonData } from '../shared/types';
 
 const initialState = {
-  pokemons: [],
+  pokemons: [] as TPokemonData[],
 };
 
 export const dataSlice = createSlice({
@@ -9,7 +10,7 @@ export const dataSlice = createSlice({
   initialState,
   reducers: {
     updateHistory: (state, action) => {
-      state.pokemons = action.payload;
+      state.pokemons.push(action.payload)
     },
   },
 });

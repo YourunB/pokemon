@@ -42,6 +42,7 @@ const PageHome: React.FC = () => {
   const handlePokemonChange = (name: string) => {
     setPokemonName(name);
     handleOpenModal();
+    if (pokemonData && 'name' in pokemonData) addPokemonToSlice(pokemonData);
   };
 
   const handlePageChange = (n: number) => {
