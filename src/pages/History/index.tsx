@@ -1,7 +1,8 @@
 import { TPokemonData } from '../../shared/types';
-import { Box } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import { CardPokemon } from './CardPokemon';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 //import { useSelector } from "react-redux";
 
 const PageHistory = () => {
@@ -26,9 +27,16 @@ const PageHistory = () => {
         gap: '10px',
       }}
     >
-      {dataPokemons.map((pokemon, i) => {
+      {dataPokemons.length > 0 ? dataPokemons.map((pokemon, i) => {
         return <CardPokemon pokemon={pokemon} updateHistory={updateHistory} key={i} />;
-      })}
+      }) : <Box sx={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}><Typography variant="h5" sx={{ textAlign: 'center', marginBottom: 2 }}>You don't have a history of Pokemon views.
+      <Link to='/home'><Box><Button variant="contained" color="primary">Back</Button></Box></Link>
+      </Typography></Box>}
     </Box>
   );
 };
