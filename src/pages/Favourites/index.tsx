@@ -1,4 +1,4 @@
-const PageStart = () => {
+const Favourites = () => {
   return (
     <div>
       Favourites page...
@@ -6,4 +6,4 @@ const PageStart = () => {
   );
 };
 
-export default PageStart;
+export default Favourites;
