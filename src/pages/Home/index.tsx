@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiSlice';
-
 import { Modal, Box, Button, Input, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateHistory } from '../../store/dataSlice';
 
 const theme = createTheme({
   palette: {
@@ -16,6 +17,7 @@ const theme = createTheme({
 });
 
 type TPokemonData = {
+  id: string,
   name: string;
   height: number;
   weight: number;
@@ -25,6 +27,19 @@ type TPokemonData = {
 };
 
 const PageHome: React.FC = () => {
+  const dispatch = useDispatch();
+  const addPokemonToSlice = (pokemon: TPokemonData) => {
+    dispatch(
+      updateHistory({
+        id: pokemon.id,
+        name: pokemon.name,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        sprites: pokemon.sprites,
+      })
+    );
+  }
+
   const [pokemonName, setPokemonName] = useState<string>('pikachu');
   const [page, setPage] = useState<number>(0);
   const [openModal, setOpenModal] = useState<boolean>(false);
