@@ -1,20 +1,7 @@
 import { Box, Typography } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#000',
-    },
-    secondary: {
-      main: '#000',
-    },
-  },
-});
 
 const PageAbout = () => {
   return (
-    <ThemeProvider theme={theme}>
       <Box
         sx={{
           display: 'flex',
@@ -148,7 +135,6 @@ const PageAbout = () => {
           This application was developed by Yury Butskevich. Thank you for using it!
         </Typography>
       </Box>
-    </ThemeProvider>
   );
 };
 

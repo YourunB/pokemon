@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { TPokemonData } from "../../shared/types";
-import { Modal, Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 const PageHistory = () => {
   const dataReduxHistory = useSelector((state) => state.dataSlice.pokemons);

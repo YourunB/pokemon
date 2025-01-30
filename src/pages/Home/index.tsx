@@ -2,21 +2,9 @@ import React, { useState } from 'react';
 import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiSlice';
 import { Box, Button, Input, Typography } from '@mui/material';
 import { ModalPokemon } from '../../shared/ui/modal/ModalPokemon';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateHistory } from '../../store/dataSlice';
 import { TPokemonData } from '../../shared/types';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#000',
-    },
-    secondary: {
-      main: '#000',
-    },
-  },
-});
 
 const PageHome: React.FC = () => {
   const dispatch = useDispatch();
@@ -63,7 +51,6 @@ const PageHome: React.FC = () => {
 
   return (
     <Box>
-      <ThemeProvider theme={theme}>
         <Input sx={{padding: '5px', fontWeight: '700'}} value={pokemonName.toUpperCase()} onChange={(e) => setPokemonName(e.target.value)} />
 
         {pokemonData && 'name' in pokemonData && (
@@ -145,7 +132,6 @@ const PageHome: React.FC = () => {
         {pokemonData && 'name' in pokemonData && (
           <ModalPokemon openModal={openModal} handleCloseModal={handleCloseModal} pokemonData={pokemonData}/>
           )}
-      </ThemeProvider>
     </Box>
   );
 };
