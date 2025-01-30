@@ -23,12 +23,12 @@ const PageHome: React.FC = () => {
   const saveToLocalStorage = (pokemon: TPokemonData) => {
     if (localStorage.pokemonsHistory) {
       const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory'));
-      dataPokemons.push(pokemon)
+      dataPokemons.push(pokemon);
       localStorage.setItem('pokemonsHistory', JSON.stringify(dataPokemons));
     } else {
       localStorage.setItem('pokemonsHistory', JSON.stringify([pokemon]));
     }
-  }
+  };
 
   const [pokemonName, setPokemonName] = useState<string>('pikachu');
   const [page, setPage] = useState<number>(0);
@@ -42,7 +42,7 @@ const PageHome: React.FC = () => {
     handleOpenModal();
     if (pokemonData && 'name' in pokemonData) {
       //addPokemonToSlice(pokemonData);
-      saveToLocalStorage(pokemonData)
+      saveToLocalStorage(pokemonData);
     }
   };
 
@@ -64,24 +64,28 @@ const PageHome: React.FC = () => {
 
   return (
     <Box>
-        <Input sx={{padding: '5px', fontWeight: '700'}} value={pokemonName.toUpperCase()} onChange={(e) => setPokemonName(e.target.value)} />
+      <Input
+        sx={{ padding: '5px', fontWeight: '700' }}
+        value={pokemonName.toUpperCase()}
+        onChange={(e) => setPokemonName(e.target.value)}
+      />
 
-        {pokemonData && 'name' in pokemonData && (
-          <Button variant="contained" color="primary" onClick={handleOpenModal}>
-            Show Pokemon Info
-          </Button>
-        )}
+      {pokemonData && 'name' in pokemonData && (
+        <Button variant="contained" color="primary" onClick={handleOpenModal}>
+          Show Pokemon Info
+        </Button>
+      )}
 
-          <Box
-            sx={{
-              height: 'calc(100vh - 62px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-          <Box>         
+      <Box
+        sx={{
+          height: 'calc(100vh - 62px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Box>
           <Typography
             variant="h4"
             sx={{
@@ -116,7 +120,12 @@ const PageHome: React.FC = () => {
                 gap: 2,
               }}
             >
-              <Button sx={{ transform: 'rotate(10deg)' }} variant="outlined" color="secondary" onClick={() => handlePageChange(-1)}>
+              <Button
+                sx={{ transform: 'rotate(10deg)' }}
+                variant="outlined"
+                color="secondary"
+                onClick={() => handlePageChange(-1)}
+              >
                 prev
               </Button>
               {pokemonList?.results?.map((pokemon: TPokemonData) => (
@@ -134,17 +143,22 @@ const PageHome: React.FC = () => {
                   {pokemon.name}
                 </Button>
               ))}
-              <Button sx={{ transform: 'rotate(10deg)' }} variant="outlined" color="secondary" onClick={() => handlePageChange(1)}>
+              <Button
+                sx={{ transform: 'rotate(10deg)' }}
+                variant="outlined"
+                color="secondary"
+                onClick={() => handlePageChange(1)}
+              >
                 next
               </Button>
             </Box>
           </Box>
-          </Box>
         </Box>
+      </Box>
 
-        {pokemonData && 'name' in pokemonData && (
-          <ModalPokemon openModal={openModal} handleCloseModal={handleCloseModal} pokemonData={pokemonData}/>
-          )}
+      {pokemonData && 'name' in pokemonData && (
+        <ModalPokemon openModal={openModal} handleCloseModal={handleCloseModal} pokemonData={pokemonData} />
+      )}
     </Box>
   );
 };

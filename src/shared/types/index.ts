@@ -1,5 +1,5 @@
 export type TPokemonData = {
-  id: string,
+  id: string;
   name: string;
   height: number;
   weight: number;

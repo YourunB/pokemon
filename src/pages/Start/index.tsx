@@ -1,13 +1,22 @@
 import pokemonLogo from '../../assets/images/logo-name.png';
 import { Link } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
-import s from './index.module.sass'
+import s from './index.module.sass';
 
 const PageStart = () => {
   return (
     <div className={s.box}>
-      <Box sx={{display: 'flex', gap: '10px', maxWidth: '1280px', margin: 'auto', minHeight: 'calc(100vh - 20px)', alignItems: 'center'}}>
-        <Box sx={{textAlign: 'center'}}>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '10px',
+          maxWidth: '1280px',
+          margin: 'auto',
+          minHeight: 'calc(100vh - 20px)',
+          alignItems: 'center',
+        }}
+      >
+        <Box sx={{ textAlign: 'center' }}>
           <Link to={'/home'}>
             <img src={pokemonLogo} className={s.logo} alt="React logo" />
           </Link>
@@ -40,7 +49,7 @@ const PageStart = () => {
               and has <a href="https://feature-sliced.design/">FSD</a> architecture.
             </Typography>
           </Box>
-          <Typography sx={{display: 'flex', gap: '10px', justifyContent: 'center'}}>
+          <Typography sx={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
             <Link to={'/home'}>START</Link>
             <Link to={'/about'}>ABOUT</Link>
           </Typography>

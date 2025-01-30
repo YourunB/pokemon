@@ -10,7 +10,7 @@ export const dataSlice = createSlice({
   initialState,
   reducers: {
     updateHistory: (state, action) => {
-      state.pokemons.push(action.payload)
+      state.pokemons.push(action.payload);
     },
   },
 });
