@@ -8,10 +8,12 @@ type PokemonProps = {
 
 export const CardPokemon = ({ pokemon, updateHistory }: PokemonProps) => {
   const deletePokemon = () => {
-    const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory'));
-    const filteredDataPokemons = dataPokemons.filter((el) => el.id != pokemon.id);
-    localStorage.setItem('pokemonsHistory', JSON.stringify(filteredDataPokemons));
-    updateHistory();
+    if (localStorage.pokemonsHistory) {
+      const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory') || '[]');
+      const filteredDataPokemons = dataPokemons.filter((el) => el.id != pokemon.id);
+      localStorage.setItem('pokemonsHistory', JSON.stringify(filteredDataPokemons));
+      updateHistory();
+    }
   };
 
   return (
