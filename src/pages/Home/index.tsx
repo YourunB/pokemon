@@ -22,7 +22,7 @@ const PageHome: React.FC = () => {
 
   const saveToLocalStorage = (pokemon: TPokemonData) => {
     if (localStorage.pokemonsHistory) {
-      const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory'));
+      const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory') || '[]');
       dataPokemons.push(pokemon);
       localStorage.setItem('pokemonsHistory', JSON.stringify(dataPokemons));
     } else {
