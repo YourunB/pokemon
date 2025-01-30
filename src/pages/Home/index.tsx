@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiSlice';
 import { Box, Button, Input, Typography } from '@mui/material';
 import { ModalPokemon } from '../../shared/ui/modal/ModalPokemon';
-import { useDispatch } from 'react-redux';
-import { updateHistory } from '../../store/dataSlice';
 import { TPokemonData } from '../../shared/types';
+//import { useDispatch } from 'react-redux';
+//import { updateHistory } from '../../store/dataSlice';
 
 const PageHome: React.FC = () => {
-  const dispatch = useDispatch();
+  /*const dispatch = useDispatch();
   const addPokemonToSlice = (pokemon: TPokemonData) => {
     dispatch(
       updateHistory({
@@ -18,6 +18,16 @@ const PageHome: React.FC = () => {
         sprites: pokemon.sprites,
       })
     );
+  }*/
+
+  const saveToLocalStorage = (pokemon: TPokemonData) => {
+    if (localStorage.pokemonsHistory) {
+      const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory'));
+      dataPokemons.push(pokemon)
+      localStorage.setItem('pokemonsHistory', JSON.stringify(dataPokemons));
+    } else {
+      localStorage.setItem('pokemonsHistory', JSON.stringify([pokemon]));
+    }
   }
 
   const [pokemonName, setPokemonName] = useState<string>('pikachu');
@@ -30,7 +40,10 @@ const PageHome: React.FC = () => {
   const handlePokemonChange = (name: string) => {
     setPokemonName(name);
     handleOpenModal();
-    if (pokemonData && 'name' in pokemonData) addPokemonToSlice(pokemonData);
+    if (pokemonData && 'name' in pokemonData) {
+      //addPokemonToSlice(pokemonData);
+      saveToLocalStorage(pokemonData)
+    }
   };
 
   const handlePageChange = (n: number) => {

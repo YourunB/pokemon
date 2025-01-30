@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
 import { TPokemonData } from "../../shared/types";
 import { Box, Button, Typography } from '@mui/material';
+//import { useSelector } from "react-redux";
 
 const PageHistory = () => {
-  const dataReduxHistory = useSelector((state) => state.dataSlice.pokemons);
-  localStorage.setItem('pokemonsHistory', JSON.stringify(dataReduxHistory));
+  //const dataReduxHistory = useSelector((state) => state.dataSlice.pokemons);
+  //localStorage.setItem('pokemonsHistory', JSON.stringify(dataReduxHistory));
   const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory'));
 
   return (
