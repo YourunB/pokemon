@@ -27,7 +27,7 @@ const PageHome: React.FC = () => {
   const saveToLocalStorage = (pokemon: TPokemonData) => {
     if (localStorage.pokemonsHistory) {
       const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory') || '[]');
-      const filteredDataPokemons = dataPokemons.filter(el => el.name !== pokemon.name)
+      const filteredDataPokemons = dataPokemons.filter((el) => el.name !== pokemon.name);
       filteredDataPokemons.push(pokemon);
       localStorage.setItem('pokemonsHistory', JSON.stringify(filteredDataPokemons));
     } else {
@@ -70,20 +70,24 @@ const PageHome: React.FC = () => {
   return (
     <Box>
       <Header />
-      <Box  sx={{
-        display: 'flex',
-        gap: '10px',
-        flexWrap: 'wrap',
-      }}>
-        <Link to="/"><img src={iconBack} alt="<-" height='30px'/></Link>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '10px',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Link to="/">
+          <img src={iconBack} alt="<-" height="30px" />
+        </Link>
         <Input
           sx={{ padding: '5px', fontWeight: '700' }}
           value={pokemonName.toUpperCase()}
           onChange={(e) => setPokemonName(e.target.value)}
         />
-  
+
         {pokemonData && 'name' in pokemonData && (
-          <Button variant="contained" color="primary" onClick={handleOpenModal} sx={{marginRight: '40px'}}>
+          <Button variant="contained" color="primary" onClick={handleOpenModal} sx={{ marginRight: '40px' }}>
             Show Pokemon Info
           </Button>
         )}

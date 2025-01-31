@@ -24,10 +24,14 @@ const PageHistory = () => {
   return (
     <Box>
       <Header />
-      <Link to="/home"><img src={iconBack} alt="<-" height='30px'/></Link>
-      <Box sx={{
-        minHeight: 'calc(100vh - 84px)',
-      }}>
+      <Link to="/home">
+        <img src={iconBack} alt="<-" height="30px" />
+      </Link>
+      <Box
+        sx={{
+          minHeight: 'calc(100vh - 84px)',
+        }}
+      >
         <Box
           sx={{
             width: '100%',
@@ -63,7 +67,7 @@ const PageHistory = () => {
           )}
         </Box>
       </Box>
-      
+
       <Footer />
     </Box>
   );
