@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
 import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiSlice';
-
-import { Modal, Box, Button, Input, Typography } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#000',
-    },
-    secondary: {
-      main: '#000',
-    },
-  },
-});
-
-type TPokemonData = {
-  name: string;
-  height: number;
-  weight: number;
-  sprites: {
-    front_default: string;
-  };
-};
+import { Box, Button, Input, Typography } from '@mui/material';
+import { ModalPokemon } from '../../shared/ui/modal/ModalPokemon';
+import { TPokemonData } from '../../shared/types';
+//import { useDispatch } from 'react-redux';
+//import { updateHistory } from '../../store/dataSlice';
 
 const PageHome: React.FC = () => {
+  /*const dispatch = useDispatch();
+  const addPokemonToSlice = (pokemon: TPokemonData) => {
+    dispatch(
+      updateHistory({
+        id: pokemon.id,
+        name: pokemon.name,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        sprites: pokemon.sprites,
+      })
+    );
+  }*/
+
+  const saveToLocalStorage = (pokemon: TPokemonData) => {
+    if (localStorage.pokemonsHistory) {
+      const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory') || '[]');
+      dataPokemons.push(pokemon);
+      localStorage.setItem('pokemonsHistory', JSON.stringify(dataPokemons));
+    } else {
+      localStorage.setItem('pokemonsHistory', JSON.stringify([pokemon]));
+    }
+  };
+
   const [pokemonName, setPokemonName] = useState<string>('pikachu');
   const [page, setPage] = useState<number>(0);
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -35,6 +40,10 @@ const PageHome: React.FC = () => {
   const handlePokemonChange = (name: string) => {
     setPokemonName(name);
     handleOpenModal();
+    if (pokemonData && 'name' in pokemonData) {
+      //addPokemonToSlice(pokemonData);
+      saveToLocalStorage(pokemonData);
+    }
   };
 
   const handlePageChange = (n: number) => {
@@ -55,25 +64,28 @@ const PageHome: React.FC = () => {
 
   return (
     <Box>
-      <ThemeProvider theme={theme}>
-        <Input sx={{padding: '5px', fontWeight: '700'}} value={pokemonName.toUpperCase()} onChange={(e) => setPokemonName(e.target.value)} />
+      <Input
+        sx={{ padding: '5px', fontWeight: '700' }}
+        value={pokemonName.toUpperCase()}
+        onChange={(e) => setPokemonName(e.target.value)}
+      />
 
-        {pokemonData && 'name' in pokemonData && (
-          <Button variant="contained" color="primary" onClick={handleOpenModal}>
-            Show Pokemon Info
-          </Button>
-        )}
+      {pokemonData && 'name' in pokemonData && (
+        <Button variant="contained" color="primary" onClick={handleOpenModal}>
+          Show Pokemon Info
+        </Button>
+      )}
 
-          <Box
-            sx={{
-              height: 'calc(100vh - 62px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-          <Box>         
+      <Box
+        sx={{
+          height: 'calc(100vh - 62px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Box>
           <Typography
             variant="h4"
             sx={{
@@ -108,7 +120,12 @@ const PageHome: React.FC = () => {
                 gap: 2,
               }}
             >
-              <Button sx={{ transform: 'rotate(10deg)' }} variant="outlined" color="secondary" onClick={() => handlePageChange(-1)}>
+              <Button
+                sx={{ transform: 'rotate(10deg)' }}
+                variant="outlined"
+                color="secondary"
+                onClick={() => handlePageChange(-1)}
+              >
                 prev
               </Button>
               {pokemonList?.results?.map((pokemon: TPokemonData) => (
@@ -126,44 +143,22 @@ const PageHome: React.FC = () => {
                   {pokemon.name}
                 </Button>
               ))}
-              <Button sx={{ transform: 'rotate(10deg)' }} variant="outlined" color="secondary" onClick={() => handlePageChange(1)}>
+              <Button
+                sx={{ transform: 'rotate(10deg)' }}
+                variant="outlined"
+                color="secondary"
+                onClick={() => handlePageChange(1)}
+              >
                 next
               </Button>
             </Box>
           </Box>
-          </Box>
         </Box>
+      </Box>
 
-        {pokemonData && 'name' in pokemonData && (
-          <Modal open={openModal} onClose={handleCloseModal}>
-            <Box
-              sx={{
-                width: '200px',
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: 'white',
-                padding: 3,
-                borderRadius: 2,
-                boxShadow: 24,
-              }}
-            >
-              <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: 2 }}>
-                {pokemonData?.name.toUpperCase()}
-              </Typography>
-              <img src={pokemonData?.sprites.front_default} alt={pokemonData?.name} style={{ width: '100px', height: '100px', display: 'block', margin: '0 auto' }} />
-              <Typography sx={{ marginTop: 2 }}>Height: {pokemonData?.height}</Typography>
-              <Typography>Weight: {pokemonData?.weight}</Typography>
-              <Box sx={{ textAlign: 'center', marginTop: 3 }}>
-                <Button variant="contained" color="primary" onClick={handleCloseModal}>
-                  Close
-                </Button>
-              </Box>
-            </Box>
-          </Modal>
-          )}
-      </ThemeProvider>
+      {pokemonData && 'name' in pokemonData && (
+        <ModalPokemon openModal={openModal} handleCloseModal={handleCloseModal} pokemonData={pokemonData} />
+      )}
     </Box>
   );
 };
