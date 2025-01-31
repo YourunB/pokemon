@@ -3,6 +3,8 @@ import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiS
 import { Box, Button, Input, Typography } from '@mui/material';
 import { ModalPokemon } from '../../shared/ui/modal/ModalPokemon';
 import { TPokemonData } from '../../shared/types';
+import iconBack from '/icons/back.svg';
+import { Link } from 'react-router-dom';
 //import { useDispatch } from 'react-redux';
 //import { updateHistory } from '../../store/dataSlice';
 
@@ -63,7 +65,13 @@ const PageHome: React.FC = () => {
   if (listError) return <div>Error loading list...</div>;
 
   return (
-    <Box>
+    <Box  sx={{
+      display: 'flex',
+      gap: '10px',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+    }}>
+      <Link to="/"><img src={iconBack} alt="<-" width='30px'/></Link>
       <Input
         sx={{ padding: '5px', fontWeight: '700' }}
         value={pokemonName.toUpperCase()}
