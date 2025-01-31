@@ -71,10 +71,9 @@ const PageHome: React.FC = () => {
       <Box  sx={{
         display: 'flex',
         gap: '10px',
-        alignItems: 'center',
         flexWrap: 'wrap',
       }}>
-        <Link to="/"><img src={iconBack} alt="<-" width='30px'/></Link>
+        <Link to="/"><img src={iconBack} alt="<-" height='30px'/></Link>
         <Input
           sx={{ padding: '5px', fontWeight: '700' }}
           value={pokemonName.toUpperCase()}

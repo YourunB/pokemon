@@ -45,14 +45,14 @@ const Header = () => {
           borderRadius: '5px',
         }}
       >
-        <MenuItem onClick={handleMenuClose} sx={{width: '200px'}}>
+        <MenuItem onClick={handleMenuClose} sx={{width: '160px'}}>
           <Link to='/home' style={styleLink}><img src={iconHome} alt='*' width='30px'/>Home</Link>
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>
           <Link to='/history' style={styleLink}><img src={iconClock} alt='*' width='30px'/>History</Link>
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>
-          <Link to='/about' style={styleLink}><img src={iconAbout} alt='*' width='30px'/>About App</Link>
+          <Link to='/about' style={styleLink}><img src={iconAbout} alt='*' width='30px'/>About</Link>
         </MenuItem>
       </Menu>
     </>
