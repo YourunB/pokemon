@@ -6,7 +6,8 @@ import iconHome from '/icons/home.svg';
 import iconAbout from '/icons/about.svg';
 import iconClock from '/icons/clock.svg';
 
-const styleLink = {display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', fontWeight: '700', textDecoration: 'inherit'}
+const styleLink = {width: '100%', color: 'inherit', fontWeight: '700', textDecoration: 'inherit'}
+const styleMenuItem = {width: '160px', display: 'flex', alignItems: 'center', gap: '10px'}
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -45,15 +46,21 @@ const Header = () => {
           borderRadius: '5px',
         }}
       >
-        <MenuItem onClick={handleMenuClose} sx={{width: '160px'}}>
-          <Link to='/home' style={styleLink}><img src={iconHome} alt='*' width='30px'/>Home</Link>
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <Link to='/history' style={styleLink}><img src={iconClock} alt='*' width='30px'/>History</Link>
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <Link to='/about' style={styleLink}><img src={iconAbout} alt='*' width='30px'/>About</Link>
-        </MenuItem>
+        <Link to='/home' style={styleLink}>
+          <MenuItem onClick={handleMenuClose} sx={styleMenuItem}>
+            <img src={iconHome} alt='*' width='30px'/>Home
+          </MenuItem>
+        </Link>
+        <Link to='/history' style={styleLink}>
+          <MenuItem onClick={handleMenuClose} sx={styleMenuItem}>
+            <img src={iconClock} alt='*' width='30px'/>History
+          </MenuItem>
+        </Link>
+        <Link to='/about' style={styleLink}>
+          <MenuItem onClick={handleMenuClose} sx={styleMenuItem}>
+            <img src={iconAbout} alt='*' width='30px'/>About
+          </MenuItem>
+        </Link>
       </Menu>
     </>
   );
