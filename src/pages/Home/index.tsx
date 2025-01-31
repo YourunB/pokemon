@@ -3,6 +3,10 @@ import { useFetchPokemonQuery, useFetchPokemonListQuery } from '../../store/apiS
 import { Box, Button, Input, Typography } from '@mui/material';
 import { ModalPokemon } from '../../shared/ui/modal/ModalPokemon';
 import { TPokemonData } from '../../shared/types';
+import iconBack from '/icons/back.svg';
+import { Link } from 'react-router-dom';
+import Header from '../../shared/ui/header';
+import { Footer } from '../../shared/ui/footer';
 //import { useDispatch } from 'react-redux';
 //import { updateHistory } from '../../store/dataSlice';
 
@@ -23,8 +27,9 @@ const PageHome: React.FC = () => {
   const saveToLocalStorage = (pokemon: TPokemonData) => {
     if (localStorage.pokemonsHistory) {
       const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory') || '[]');
-      dataPokemons.push(pokemon);
-      localStorage.setItem('pokemonsHistory', JSON.stringify(dataPokemons));
+      const filteredDataPokemons = dataPokemons.filter((el) => el.name !== pokemon.name);
+      filteredDataPokemons.push(pokemon);
+      localStorage.setItem('pokemonsHistory', JSON.stringify(filteredDataPokemons));
     } else {
       localStorage.setItem('pokemonsHistory', JSON.stringify([pokemon]));
     }
@@ -64,21 +69,33 @@ const PageHome: React.FC = () => {
 
   return (
     <Box>
-      <Input
-        sx={{ padding: '5px', fontWeight: '700' }}
-        value={pokemonName.toUpperCase()}
-        onChange={(e) => setPokemonName(e.target.value)}
-      />
+      <Header />
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '10px',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Link to="/">
+          <img src={iconBack} alt="<-" height="30px" />
+        </Link>
+        <Input
+          sx={{ padding: '5px', fontWeight: '700' }}
+          value={pokemonName.toUpperCase()}
+          onChange={(e) => setPokemonName(e.target.value)}
+        />
 
-      {pokemonData && 'name' in pokemonData && (
-        <Button variant="contained" color="primary" onClick={handleOpenModal}>
-          Show Pokemon Info
-        </Button>
-      )}
+        {pokemonData && 'name' in pokemonData && (
+          <Button variant="contained" color="primary" onClick={handleOpenModal} sx={{ marginRight: '40px' }}>
+            Show Pokemon Info
+          </Button>
+        )}
+      </Box>
 
       <Box
         sx={{
-          height: 'calc(100vh - 62px)',
+          minHeight: 'calc(100vh - 92px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -159,6 +176,8 @@ const PageHome: React.FC = () => {
       {pokemonData && 'name' in pokemonData && (
         <ModalPokemon openModal={openModal} handleCloseModal={handleCloseModal} pokemonData={pokemonData} />
       )}
+
+      <Footer />
     </Box>
   );
 };

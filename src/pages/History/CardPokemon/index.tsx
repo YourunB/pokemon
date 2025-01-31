@@ -20,6 +20,7 @@ export const CardPokemon = ({ pokemon, updateHistory }: PokemonProps) => {
     <Box
       sx={{
         width: '200px',
+        height: '280px',
         backgroundColor: 'white',
         padding: 3,
         borderRadius: 2,
