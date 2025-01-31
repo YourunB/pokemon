@@ -6,6 +6,7 @@ import { TPokemonData } from '../../shared/types';
 import iconBack from '/icons/back.svg';
 import { Link } from 'react-router-dom';
 import Header from '../../shared/ui/header';
+import { Footer } from '../../shared/ui/footer';
 //import { useDispatch } from 'react-redux';
 //import { updateHistory } from '../../store/dataSlice';
 
@@ -26,8 +27,9 @@ const PageHome: React.FC = () => {
   const saveToLocalStorage = (pokemon: TPokemonData) => {
     if (localStorage.pokemonsHistory) {
       const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory') || '[]');
-      dataPokemons.push(pokemon);
-      localStorage.setItem('pokemonsHistory', JSON.stringify(dataPokemons));
+      const filteredDataPokemons = dataPokemons.filter(el => el.name !== pokemon.name)
+      filteredDataPokemons.push(pokemon);
+      localStorage.setItem('pokemonsHistory', JSON.stringify(filteredDataPokemons));
     } else {
       localStorage.setItem('pokemonsHistory', JSON.stringify([pokemon]));
     }
@@ -170,6 +172,8 @@ const PageHome: React.FC = () => {
       {pokemonData && 'name' in pokemonData && (
         <ModalPokemon openModal={openModal} handleCloseModal={handleCloseModal} pokemonData={pokemonData} />
       )}
+
+      <Footer />
     </Box>
   );
 };
