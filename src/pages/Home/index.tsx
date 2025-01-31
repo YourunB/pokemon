@@ -5,6 +5,7 @@ import { ModalPokemon } from '../../shared/ui/modal/ModalPokemon';
 import { TPokemonData } from '../../shared/types';
 import iconBack from '/icons/back.svg';
 import { Link } from 'react-router-dom';
+import Header from '../../shared/ui/header';
 //import { useDispatch } from 'react-redux';
 //import { updateHistory } from '../../store/dataSlice';
 
@@ -65,24 +66,27 @@ const PageHome: React.FC = () => {
   if (listError) return <div>Error loading list...</div>;
 
   return (
-    <Box  sx={{
-      display: 'flex',
-      gap: '10px',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-    }}>
-      <Link to="/"><img src={iconBack} alt="<-" width='30px'/></Link>
-      <Input
-        sx={{ padding: '5px', fontWeight: '700' }}
-        value={pokemonName.toUpperCase()}
-        onChange={(e) => setPokemonName(e.target.value)}
-      />
-
-      {pokemonData && 'name' in pokemonData && (
-        <Button variant="contained" color="primary" onClick={handleOpenModal}>
-          Show Pokemon Info
-        </Button>
-      )}
+    <Box>
+      <Header />
+      <Box  sx={{
+        display: 'flex',
+        gap: '10px',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+      }}>
+        <Link to="/"><img src={iconBack} alt="<-" width='30px'/></Link>
+        <Input
+          sx={{ padding: '5px', fontWeight: '700' }}
+          value={pokemonName.toUpperCase()}
+          onChange={(e) => setPokemonName(e.target.value)}
+        />
+  
+        {pokemonData && 'name' in pokemonData && (
+          <Button variant="contained" color="primary" onClick={handleOpenModal} sx={{marginRight: '40px'}}>
+            Show Pokemon Info
+          </Button>
+        )}
+      </Box>
 
       <Box
         sx={{
