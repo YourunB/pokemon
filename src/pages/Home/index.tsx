@@ -7,8 +7,11 @@ import iconBack from '/icons/back.svg';
 import { Link } from 'react-router-dom';
 import Header from '../../shared/ui/header';
 import { Footer } from '../../shared/ui/footer';
+import imgPokemon from '/picachu.png'
 //import { useDispatch } from 'react-redux';
 //import { updateHistory } from '../../store/dataSlice';
+
+import s from './index.module.sass'
 
 const PageHome: React.FC = () => {
   /*const dispatch = useDispatch();
@@ -112,7 +115,7 @@ const PageHome: React.FC = () => {
               color: '#333',
             }}
           >
-            POKEMONS
+            <span className={s.container}><img src={imgPokemon} alt="*_*" className={s.pikachu} />POKEMONS</span>
           </Typography>
 
           <Box

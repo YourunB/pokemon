@@ -1,0 +1,41 @@
+.container
+  display: block
+  position: relative
+  background: white
+  user-select: none
+  width: fit-content
+  margin: auto
+  border-radius: 10px
+  margin-top: 60px
+
+.pikachu
+  z-index: -1
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  width: 40px
+  animation: show-pokemon infinite 10s
+
+@keyframes show-pokemon
+  0%
+    opacity: 0
+    transform: translate(-50%, -50%)
+  10%
+    opacity: 1
+    transform: translate(-50%, -160%)
+  30%
+    opacity: 0
+    transform: translate(-50%, -50%)
+  40%
+    opacity: 1
+    transform: translate(-350%, -50%)
+  60%
+    opacity: 0
+    transform: translate(-50%, -50%)
+  80%
+    opacity: 1
+    transform: translate(250%, -50%)
+  100%
+    opacity: 0
+    transform: translate(-50%, -50%)
