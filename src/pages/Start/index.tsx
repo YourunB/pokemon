@@ -14,6 +14,7 @@ const PageStart = () => {
           margin: 'auto',
           minHeight: 'calc(100vh - 20px)',
           alignItems: 'center',
+          userSelect: 'none',
         }}
       >
         <Box sx={{ textAlign: 'center' }}>

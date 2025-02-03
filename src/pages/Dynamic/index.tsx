@@ -16,7 +16,7 @@ export const PageDynamic = () => {
   const { data: pokemonData } = useFetchPokemonQuery(id || '');
 
   return (
-    <Box>
+    <Box sx={{userSelect: 'none'}}>
       <Header />
       <Link to="/pokemons">
         <img src={iconBack} alt="<-" height="30px" />
