@@ -22,9 +22,9 @@ const PageHistory = () => {
   }, []);
 
   return (
-    <Box>
+    <Box sx={{ userSelect: 'none' }}>
       <Header />
-      <Link to="/home">
+      <Link to="/pokemons">
         <img src={iconBack} alt="<-" height="30px" />
       </Link>
       <Box
@@ -55,7 +55,7 @@ const PageHistory = () => {
             >
               <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: 2 }}>
                 You don't have a history of Pokemon views.
-                <Link to="/home">
+                <Link to="/pokemons">
                   <Box>
                     <Button variant="contained" color="primary">
                       Back
