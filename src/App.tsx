@@ -5,6 +5,7 @@ import PageAbout from './pages/About';
 import PageHome from './pages/Home';
 import PageNotFound from './pages/NotFound';
 import PageHistory from './pages/History';
+import { PageDynamic } from './pages/Dynamic';
 
 const theme = createTheme({
   palette: {
@@ -24,9 +25,10 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<PageStart />} />
-            <Route path="/home" element={<PageHome />} />
+            <Route path="/pokemons" element={<PageHome />} />
             <Route path="/about" element={<PageAbout />} />
             <Route path="/history" element={<PageHistory />} />
+            <Route path="/pokemons/:id" element={<PageDynamic />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

@@ -17,7 +17,7 @@ const PageStart = () => {
         }}
       >
         <Box sx={{ textAlign: 'center' }}>
-          <Link to={'/home'}>
+          <Link to={'/pokemons'}>
             <img src={pokemonLogo} className={s.logo} alt="React logo" />
           </Link>
           <Box>
@@ -50,7 +50,7 @@ const PageStart = () => {
             </Typography>
           </Box>
           <Typography sx={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-            <Link to={'/home'}>START</Link>
+            <Link to={'/pokemons'}>START</Link>
             <Link to={'/about'}>ABOUT</Link>
           </Typography>
         </Box>

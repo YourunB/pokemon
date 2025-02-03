@@ -46,7 +46,7 @@ const Header = () => {
           borderRadius: '5px',
         }}
       >
-        <Link to="/home" style={styleLink}>
+        <Link to="/pokemons" style={styleLink}>
           <MenuItem onClick={handleMenuClose} sx={styleMenuItem}>
             <img src={iconHome} alt="*" width="30px" />
             Home
