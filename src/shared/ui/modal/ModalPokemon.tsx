@@ -23,9 +23,9 @@ export const ModalPokemon = ({ openModal, handleCloseModal, pokemonData }: TModa
           boxShadow: 24,
         }}
       >
-        <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: 2 }}>
+        <Button variant="outlined" color="primary" sx={{margin: 'auto', display: 'block'}}>
           {pokemonData?.name.toUpperCase()}
-        </Typography>
+        </Button>
         <img
           src={pokemonData?.sprites.front_default}
           alt={pokemonData?.name}
