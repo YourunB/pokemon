@@ -4,6 +4,7 @@ import { Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import iconYoutube from '/icons/youtube.svg';
 import iconGoogle from '/icons/google.svg';
+import { TPokemonData, TMoveData } from "../../shared/types";
 
 const styleBox = {display: 'flex', alignItems: 'center', gap: '5px', flexWrap: 'wrap', borderRadius: '5px'}
 
@@ -34,9 +35,9 @@ export const PageDynamic = () => {
           <Typography textAlign={'center'}>Height: {pokemonData.height} Weight: {pokemonData.weight}</Typography>
           <Typography variant="h4">Moves</Typography>
           <Box sx={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)'}}>
-            {pokemonData.moves.map((v, i) => {
+            {pokemonData.moves.map((v: TMoveData, i: number) => {
               return (
-                <Box sx={{...styleBox, padding: '10px'}}>
+                <Box key={i} sx={{...styleBox, padding: '10px'}}>
                   <Link key={i} to={`https://www.youtube.com/results?search_query=pokemon ${v.move.name}`} target="_blank">
                     <img src={iconYoutube} alt='Youtube' width='30px' />
                   </Link>
