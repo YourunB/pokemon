@@ -23,7 +23,7 @@ export const ModalPokemon = ({ openModal, handleCloseModal, pokemonData }: TModa
           boxShadow: 24,
         }}
       >
-        <Button variant="outlined" color="primary" sx={{margin: 'auto', display: 'block'}}>
+        <Button variant="outlined" color="primary" sx={{ margin: 'auto', display: 'block' }}>
           {pokemonData?.name.toUpperCase()}
         </Button>
         <img

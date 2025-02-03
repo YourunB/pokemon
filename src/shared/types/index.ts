@@ -1,12 +1,12 @@
 export type TMoveData = {
   move: {
     name: string;
-  }
-}
+  };
+};
 
 export type TMovesData = {
   moves: TMoveData;
-}
+};
 
 export type TPokemonData = {
   id: string;
@@ -16,6 +16,5 @@ export type TPokemonData = {
   sprites: {
     front_default: string;
   };
-  moves: TMovesData[]
+  moves: TMovesData[];
 };
-
