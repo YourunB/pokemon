@@ -1,5 +1,6 @@
 import { TPokemonData } from '../../../shared/types';
 import { Box, Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 type PokemonProps = {
   pokemon: TPokemonData;
@@ -7,6 +8,12 @@ type PokemonProps = {
 };
 
 export const CardPokemon = ({ pokemon, updateHistory }: PokemonProps) => {
+  const navigate = useNavigate();
+  
+  const handleOpenPage = () => {
+    navigate(`/pokemons/${pokemon.name}`);
+  }
+
   const deletePokemon = () => {
     if (localStorage.pokemonsHistory) {
       const dataPokemons: TPokemonData[] = JSON.parse(localStorage.getItem('pokemonsHistory') || '[]');
@@ -28,9 +35,9 @@ export const CardPokemon = ({ pokemon, updateHistory }: PokemonProps) => {
       }}
       key={pokemon.id}
     >
-      <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: 2 }}>
+      <Button variant="outlined" color="primary" sx={{ margin: 'auto', display: 'block' }} onClick={handleOpenPage}>
         {pokemon?.name.toUpperCase()}
-      </Typography>
+      </Button>
       <img
         src={pokemon?.sprites.front_default}
         alt={pokemon?.name}
