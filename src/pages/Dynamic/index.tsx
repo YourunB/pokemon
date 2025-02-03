@@ -1,9 +1,11 @@
 import { useFetchPokemonQuery } from "../../store/apiSlice";
 import { useParams } from 'react-router-dom';
-import { useState } from "react";
-import { TPokemonData } from "../../shared/types";
 import { Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import iconYoutube from '/icons/youtube.svg';
+import iconGoogle from '/icons/google.svg';
+
+const styleBox = {display: 'flex', alignItems: 'center', gap: '5px', flexWrap: 'wrap', borderRadius: '5px'}
 
 export const PageDynamic = () => {
   const { id } = useParams();
@@ -15,10 +17,35 @@ export const PageDynamic = () => {
     <>
       {pokemonData ? 
         <Box>
-          <Typography>Pokemon: {pokemonData.name}</Typography>
-          <Typography>Height: {pokemonData.height}</Typography>
-          <Typography>Weight: {pokemonData.weight}</Typography>
-          <Link to={`https://www.youtube.com/results?search_query=${pokemonData.name}`} target="_blank">Show on Youtube</Link>
+          <img
+            src={pokemonData?.sprites.front_default}
+            alt={pokemonData?.name}
+            style={{ width: '100px', height: '100px', display: 'block', margin: '0 auto' }}
+          />
+          <Box sx={{...styleBox, justifyContent: 'center'}}>
+            <Link to={`https://www.youtube.com/results?search_query=${pokemonData.name}`} target="_blank">
+              <img src={iconYoutube} alt='Youtube' width='30px' />
+            </Link>
+            <Link to={`https://www.google.com/search?q=pokemon ${pokemonData.name}`}>
+              <img src={iconGoogle} alt="Google" width='30px' />
+            </Link>
+            <Typography variant="h4">{pokemonData.name.toUpperCase()}</Typography>
+          </Box>
+          <Typography textAlign={'center'}>Height: {pokemonData.height} Weight: {pokemonData.weight}</Typography>
+          <Typography variant="h4">Moves</Typography>
+          {pokemonData.moves.map((v, i) => {
+            return (
+              <Box sx={{...styleBox, border: 'solid 1px gray', padding: '10px'}}>
+                <Link key={i} to={`https://www.youtube.com/results?search_query=pokemon ${v.move.name}`} target="_blank">
+                  <img src={iconYoutube} alt='Youtube' width='30px' />
+                </Link>
+                <Link to={`https://www.google.com/search?q=pokemon ${v.move.name}`}>
+                  <img src={iconGoogle} alt="Google" width='30px' />
+                </Link>
+                {v.move.name.toUpperCase()}
+              </Box>
+            )
+          })}
         </Box>
        : null}
     </>
