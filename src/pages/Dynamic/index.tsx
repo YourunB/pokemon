@@ -33,19 +33,21 @@ export const PageDynamic = () => {
           </Box>
           <Typography textAlign={'center'}>Height: {pokemonData.height} Weight: {pokemonData.weight}</Typography>
           <Typography variant="h4">Moves</Typography>
-          {pokemonData.moves.map((v, i) => {
-            return (
-              <Box sx={{...styleBox, border: 'solid 1px gray', padding: '10px'}}>
-                <Link key={i} to={`https://www.youtube.com/results?search_query=pokemon ${v.move.name}`} target="_blank">
-                  <img src={iconYoutube} alt='Youtube' width='30px' />
-                </Link>
-                <Link to={`https://www.google.com/search?q=pokemon ${v.move.name}`}>
-                  <img src={iconGoogle} alt="Google" width='30px' />
-                </Link>
-                {v.move.name.toUpperCase()}
-              </Box>
-            )
-          })}
+          <Box sx={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)'}}>
+            {pokemonData.moves.map((v, i) => {
+              return (
+                <Box sx={{...styleBox, padding: '10px'}}>
+                  <Link key={i} to={`https://www.youtube.com/results?search_query=pokemon ${v.move.name}`} target="_blank">
+                    <img src={iconYoutube} alt='Youtube' width='30px' />
+                  </Link>
+                  <Link to={`https://www.google.com/search?q=pokemon ${v.move.name}`} target="_blank">
+                    <img src={iconGoogle} alt="Google" width='30px' />
+                  </Link>
+                  {v.move.name.toUpperCase()}
+                </Box>
+              )
+            })}
+          </Box>
         </Box>
        : null}
     </>
