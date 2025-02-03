@@ -10,10 +10,10 @@ type TModal = {
 
 export const ModalPokemon = ({ openModal, handleCloseModal, pokemonData }: TModal) => {
   const navigate = useNavigate();
-  
+
   const handleOpenPage = () => {
     navigate(`/pokemons/${pokemonData.name}`);
-  }
+  };
 
   return (
     <>
@@ -50,5 +50,5 @@ export const ModalPokemon = ({ openModal, handleCloseModal, pokemonData }: TModa
         </Box>
       </Modal>
     </>
-  )
+  );
 };

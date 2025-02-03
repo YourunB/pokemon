@@ -22,7 +22,7 @@ const PageHistory = () => {
   }, []);
 
   return (
-    <Box sx={{userSelect: 'none'}}>
+    <Box sx={{ userSelect: 'none' }}>
       <Header />
       <Link to="/pokemons">
         <img src={iconBack} alt="<-" height="30px" />

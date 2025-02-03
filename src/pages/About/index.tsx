@@ -4,7 +4,7 @@ import Header from '../../shared/ui/header';
 
 const PageAbout = () => {
   return (
-    <Box sx={{userSelect: 'none'}}>
+    <Box sx={{ userSelect: 'none' }}>
       <Box sx={{ height: '40px' }}>
         <Header />
       </Box>

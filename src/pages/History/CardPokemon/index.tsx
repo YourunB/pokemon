@@ -9,10 +9,10 @@ type PokemonProps = {
 
 export const CardPokemon = ({ pokemon, updateHistory }: PokemonProps) => {
   const navigate = useNavigate();
-  
+
   const handleOpenPage = () => {
     navigate(`/pokemons/${pokemon.name}`);
-  }
+  };
 
   const deletePokemon = () => {
     if (localStorage.pokemonsHistory) {
