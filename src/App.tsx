@@ -6,6 +6,7 @@ import PageHome from './pages/Home';
 import PageNotFound from './pages/NotFound';
 import PageHistory from './pages/History';
 import { PageDynamic } from './pages/Dynamic';
+import { BackgroundBall } from './shared/ui/background';
 
 const theme = createTheme({
   palette: {
@@ -21,6 +22,7 @@ const theme = createTheme({
 const App = () => {
   return (
     <>
+      <BackgroundBall />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Routes>
