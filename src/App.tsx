@@ -6,7 +6,7 @@ import PageHome from './pages/Home';
 import PageNotFound from './pages/NotFound';
 import PageHistory from './pages/History';
 import { PageDynamic } from './pages/Dynamic';
-import imgPokemon from './../public/ball.png';
+import { BackgroundBall } from './shared/ui/background';
 
 const theme = createTheme({
   palette: {
@@ -22,9 +22,7 @@ const theme = createTheme({
 const App = () => {
   return (
     <>
-      <div className="ball">
-        <img src={imgPokemon} alt="Pokemon" className="ball__pokemon" />
-      </div>
+      <BackgroundBall />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Routes>
